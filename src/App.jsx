@@ -5,7 +5,9 @@ import About from "./components/About";
 import Features from "./components/Features";
 import Roadmap from "./components/Roadmap";
 import Footer from "./components/Footer";
-import "./style.css";
+import "./components/style.css";
+
+
 
 function App() {
   return (
