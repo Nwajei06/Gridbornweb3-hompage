@@ -5,7 +5,7 @@ import About from "./components/About";
 import Features from "./components/Features";
 import Roadmap from "./components/Roadmap";
 import Footer from "./components/Footer";
-import "./components/style.css";
+import "./components/Style.css";
 
 
 

@@ -285,22 +285,20 @@ body, html, #root {
 
 
 
-/* ================= MOBILE STYLES ================= */
+/*  MOBILE STYLES */
 @media (max-width: 768px) {
   /* Navbar */
   .navbar {
     padding: 10px 20px;
-    flex-direction: row;       /* ✅ keep logo + menu on same row */
+    flex-direction: row;       
     justify-content: space-between;
     align-items: center;
   }
 
-  /* Hide desktop links + wallet button */
   .desktop-only {
     display: none;
   }
 
-  /* Hamburger menu */
   .menu-toggle {
     display: block;
     font-size: 28px;
@@ -309,11 +307,11 @@ body, html, #root {
     z-index: 2001;
   }
 
-  /* Slide-in mobile menu */
+ 
   .mobile-menu {
     position: fixed;
     top: 0;
-    left: -100%; /* hide off-screen */
+    left: -100%;
     height: 100vh;
     width: 250px;
     background: black;
