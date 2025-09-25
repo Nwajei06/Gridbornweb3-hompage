@@ -1,41 +1,63 @@
-import React, { useState } from "react";
-import logo from "../assets/logo-img.png"; // ✅ Import image
+import React, { useState, useRef, useEffect } from "react";
+import logo from "../assets/logo-img.png";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  // Close menu if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   return (
     <nav className="navbar">
-      {/* Logo */}
+      {/* Left: Logo + brand */}
       <div className="logo">
         <img src={logo} alt="Gridborn Logo" className="logo-img" />
         <h1>GRIDBORN</h1>
       </div>
 
-      {/* Desktop Links */}
-      <ul className="nav-links desktop-only">
-        <li>About</li>
-        <li>Features</li>
-        <li>Roadmap</li>
-        <li>Community</li>
-      </ul>
-
-      {/* Connect Wallet Button */}
-      <button className="wallet-btn desktop-only">Connect Wallet</button>
+      {/* Right: Nav links + button (desktop only) */}
+      <div className="navbar-right desktop-only">
+        <ul className="nav-links">
+          <li>About</li>
+          <li>Features</li>
+          <li>Roadmap</li>
+          <li>Community</li>
+        </ul>
+        <button className="wallet-btn">Connect Wallet</button>
+      </div>
 
       {/* Hamburger Menu */}
       <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
         ☰
       </div>
 
-      {/* Mobile Menu (slide-in) */}
-      <ul className={`mobile-menu ${menuOpen ? "show" : ""}`}>
-        <li>About</li>
-        <li>Features</li>
-        <li>Roadmap</li>
-        <li>Community</li>
+      {/* Mobile Menu */}
+      <ul ref={menuRef} className={`mobile-menu ${menuOpen ? "show" : ""}`}>
+        <li onClick={() => setMenuOpen(false)}>About</li>
+        <li onClick={() => setMenuOpen(false)}>Features</li>
+        <li onClick={() => setMenuOpen(false)}>Roadmap</li>
+        <li onClick={() => setMenuOpen(false)}>Community</li>
         <li>
-          <button className="wallet-btn">Connect Wallet</button>
+          <button className="wallet-btn" onClick={() => setMenuOpen(false)}>
+            Connect Wallet
+          </button>
         </li>
       </ul>
     </nav>

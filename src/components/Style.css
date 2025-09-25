@@ -15,20 +15,43 @@ body, html, #root {
 
 
 
+/* Navbar wrapper */
 .navbar {
   position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 15px 60px;   /* ⬅️ increased left/right padding */
+  padding: 15px 60px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* logo left, menu+button right */
+  align-items: center;            /* all in one line vertically centered */
   background: black;
   color: #ff0000;
   font-family: Arial, sans-serif;
   z-index: 1000;
-  box-sizing: border-box; /* ensures padding doesn't break layout */
+}
+
+/* Logo + brand */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Right side (links + wallet button) */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* space between links and button */
+}
+
+/* Nav links inline */
+.nav-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .logo {
@@ -283,7 +306,13 @@ body, html, #root {
   text-shadow: 0 0 6px #ff0000;
 }
 
+.menu-toggle {
+  display: none; /* hamburger hidden on desktop */
+}
 
+.mobile-menu {
+  display: none; /* mobile menu hidden on desktop */
+}
 
 /*  MOBILE STYLES */
 @media (max-width: 768px) {
@@ -295,10 +324,11 @@ body, html, #root {
     align-items: center;
   }
 
-  .desktop-only {
+    .desktop-only {
     display: none;
   }
 
+  /* show hamburger */
   .menu-toggle {
     display: block;
     font-size: 28px;
@@ -307,20 +337,22 @@ body, html, #root {
     z-index: 2001;
   }
 
- 
+
+  /* slide-in mobile menu */
   .mobile-menu {
+    display: flex;              /* now visible only on mobile */
     position: fixed;
     top: 0;
     left: -100%;
     height: 100vh;
     width: 250px;
     background: black;
-    display: flex;
     flex-direction: column;
     padding: 80px 20px;
     gap: 25px;
     transition: left 0.4s ease-in-out;
     z-index: 2000;
+    list-style: none;           /* no bullets */
   }
 
   .mobile-menu.show {
@@ -332,9 +364,11 @@ body, html, #root {
     opacity: 0;
     transform: translateX(-20px);
     animation: fadeIn 0.4s forwards;
+    list-style: none;
+    margin: 0;
   }
 
-  /* Staggered fade-in animation */
+  /* Staggered fade-in */
   .mobile-menu.show li:nth-child(1) { animation-delay: 0.1s; }
   .mobile-menu.show li:nth-child(2) { animation-delay: 0.2s; }
   .mobile-menu.show li:nth-child(3) { animation-delay: 0.3s; }
